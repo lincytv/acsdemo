@@ -1,0 +1,35 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  labels:
+    app: kafka
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: itmpasia.azurecr.io/kafka:53
+        imagePullPolicy: Always
+        env:
+        - name: CONNECT_BOOTSTRAP_SERVERS
+          value: "lkc-61w02-loq6y.eu-west-3.aws.glb.confluent.cloud:9092"
+        - name: CONNECT_REST_PORT
+          value: "9092"
+        - name: runslo
+        # command: ["/bin/sleep"]
+        # args:
+        # - "365d"
+        ports:
+        - containerPort: 8083
+      imagePullSecrets:
+      - name: itmpasia-acr-push
