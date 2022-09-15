@@ -21,10 +21,28 @@ spec:
         image: itmpasia.azurecr.io/kafka:66
         imagePullPolicy: Always
         env:
+        - name: HTTP_PROXY
+          value: "http://proxy.aztecse-itmpasia-intake.ase1.aws.aztec.cloud.allianz:8888"
+        - name: HTTPS_PROXY
+          value: "http://proxy.aztecse-itmpasia-intake.ase1.aws.aztec.cloud.allianz:8888"
+        - name: http_proxy
+          value: "http://proxy.aztecse-itmpasia-intake.ase1.aws.aztec.cloud.allianz:8888"
+        - name: https_proxy
+          value: "http://proxy.aztecse-itmpasia-intake.ase1.aws.aztec.cloud.allianz:8888"
         - name: CONNECT_BOOTSTRAP_SERVERS
           value: "lkc-61w02-loq6y.eu-west-3.aws.glb.confluent.cloud:9092"
         - name: CONNECT_REST_PORT
           value: "9092"
+        - name: CONNECT_KEY_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_VALUE_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_INTERNAL_KEY_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_INTERNAL_VALUE_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_PLUGIN_PATH
+          value: /usr/share/java,/usr/share/confluent-hub-components,/usr/share/confluent-hub-components/confluentinc-kafka-connect-mqtt,/usr/share/confluent-hub-components/confluentinc-kafka-connect-mqtt/lib/*.jar
         - name: runslo
         # command: ["/bin/sleep"]
         # args:
